@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import pl from '../i18n/pl.json';
+
+// Użyj tłumaczeń dla języka polskiego
+const content = pl.index;
+---
+
+<Layout
+  title={content.title}
+  description={content.description}
+  ogImage="/images/home-og.jpg"
+>
+  <h1>{content.heading}</h1>
+</Layout>

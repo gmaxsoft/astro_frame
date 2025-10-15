@@ -1,0 +1,41 @@
+---
+import { SEO } from 'astro-seo';
+
+// Domyślne wartości dla propsów, aby uniknąć undefined
+const { title = 'Domyślny tytuł', description = 'Domyślny opis', ogImage = '/images/default-og.jpg' } = Astro.props;
+
+// Pobierz aktualny język z kontekstu Astro, domyślnie 'pl'
+const currentLocale = Astro.currentLocale || 'pl';
+---
+
+<!DOCTYPE html>
+<html lang={currentLocale}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<SEO
+			title={title}
+			description={description}
+			openGraph={{
+				basic: {
+					title: title,
+					type: 'website',
+					image: ogImage,
+					url: Astro.url.href
+				},
+				image: {
+					alt: 'Opis obrazu'
+				}
+			}}
+			twitter={{
+				card: 'summary_large_image',
+				site: '@twoj_twitter'
+			}}
+		/>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

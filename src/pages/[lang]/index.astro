@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import pl from '../../i18n/pl.json';
+import en from '../../i18n/en.json';
+
+// Mapa tłumaczeń
+const translations = { pl, en };
+
+// Eksport funkcji getStaticPaths dla dynamicznego routingu
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'pl' } }, // Strona dla języka polskiego
+    { params: { lang: 'en' } }  // Strona dla języka angielskiego
+  ];
+}
+
+// Pobierz parametr lang z Astro.params
+const { lang } = Astro.params as { lang: 'pl' | 'en' };
+
+// Użyj domyślnego języka 'pl', jeśli lang nie jest zdefiniowany
+const content = translations[lang]?.index || translations.pl.index;
+---
+
+<Layout
+  title={content.title}
+  description={content.description}
+  ogImage="/images/home-og.jpg"
+>
+  <h1>{content.heading}</h1>
+</Layout>
